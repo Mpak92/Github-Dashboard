@@ -1,7 +1,15 @@
 import styles from './MainPage.module.css';
 import { useForm } from "react-hook-form";
+import useFetch from './../customHooks/useFetch';
 
-const MainPage = () => {
+const MainPage = (props) => {
+
+    const { data, error, loading } = useFetch(`https://api.github.com/search/repositories?q=stars:%3E3000&sort=stars&per_page=${props.pageSize}&page=1`);
+    if (loading) return <div>Loading...</div>;
+    if (error) console.log(error);
+    
+    props.setRepositories(data?.items);
+
     return (
         <div className={styles.container}>
             <div className={styles.titul}>Github Dasgboard</div>
@@ -10,6 +18,7 @@ const MainPage = () => {
                 <table className={styles.table}>
                     <thead>
                         <tr>
+                            <th>№</th>
                             <th>Название репозитория</th>
                             <th>Кол-во звёзд на github</th>
                             <th>Дата последнего коммита</th>
@@ -17,66 +26,15 @@ const MainPage = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>6</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>7</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>8</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>9</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>10</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
+                        {props.repositories.map((rep, index) => {
+                            return <tr key={rep.id}>
+                                <td>{index + 1}</td>
+                                <td>{rep.name}</td>
+                                <td>{rep.stargazers_count}</td>
+                                <td>{rep.pushed_at}</td>
+                                <td>{rep.html_url}</td>
+                            </tr>
+                        })}
                     </tbody>
                 </table>
             </div>

@@ -1,5 +1,5 @@
 import {applyMiddleware, combineReducers, compose, createStore} from 'redux';
-import mainPageReducer from './MainPage-reducer';
+import mainPageReducer from './mainPage-reducer';
 import thunkMiddleware from 'redux-thunk';
 
 const reducers = combineReducers({
