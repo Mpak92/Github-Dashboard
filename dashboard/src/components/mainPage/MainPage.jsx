@@ -1,5 +1,6 @@
 import styles from './MainPage.module.css';
 import { useForm } from "react-hook-form";
+import Paginator from '../common/Paginator';
 
 const MainPage = (props) => {
     return (
@@ -30,7 +31,10 @@ const MainPage = (props) => {
                     </tbody>
                 </table>
             </div>
-            <div className={styles.paginator}>1, 2, 3, 4, 5</div>
+            <div className={styles.paginator}><Paginator pageSize={props.pageSize}
+                totalCount={props.totalCount}
+                currentPage={props.currentPage} />
+            </div>
         </div>
     )
 }

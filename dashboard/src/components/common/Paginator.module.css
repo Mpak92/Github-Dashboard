@@ -1,0 +1,16 @@
+.page {
+    display: grid;
+    justify-content: start;
+    justify-items: center;
+    align-items: end;
+    grid-template-columns: repeat(10, auto);
+    margin-top: 50px;
+    margin-left: 100px;
+    font-size: 25px;
+    gap: 20px;
+}
+
+.activePage {
+    font-size: 28px;
+    font-weight: bold;
+}
