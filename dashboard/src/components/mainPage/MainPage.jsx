@@ -1,6 +1,7 @@
 import styles from './MainPage.module.css';
 import { useForm } from "react-hook-form";
 import Paginator from '../common/Paginator';
+import { useEffect } from 'react';
 
 const MainPage = (props) => {
     return (
@@ -33,17 +34,25 @@ const MainPage = (props) => {
             </div>
             <div className={styles.paginator}><Paginator pageSize={props.pageSize}
                 totalCount={props.totalCount}
-                currentPage={props.currentPage} />
+                currentPage={props.currentPage} 
+                setCurrentPage={props.setCurrentPage} />
             </div>
         </div>
     )
 }
 
 const MainPageForm = (props) => {
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, watch, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = data => {
         props.setSearchName(data.searchByName);
     }
+
+    // useEffect(() => {
+    //     const subscription = watch((data) => {
+    //         props.setSearchName(data);
+    //     })
+    //     return () => subscription.unsubscribe();
+    // }, [watch]);
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>

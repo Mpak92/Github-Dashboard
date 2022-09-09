@@ -13,15 +13,11 @@ const Paginator = (props) => {
     const currPageLast = currPage + 5;
     const slicedPages = pages.slice(currPageFirst, currPageLast);
 
-    const onPageChanged = (pageNumber) => {
-        this.props.updateUsers(pageNumber, this.props.pageSize);
-    }
-
     return (
         <div className={style.page}>
             {slicedPages.map(p => <div key={p}
                 className={props.currentPage === p ? style.activePage : style.notActive}
-                onClick={() => { props.onPageChanged(p) }}>{p}</div>)}
+                onClick={() => { props.setCurrentPage(p) }}>{p}</div>)}
         </div>
     )
 }

@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
 import MainPage from './MainPage';
-import { setRepositories, setSearchName } from './../../redux/mainPage-reducer';
+import { setRepositories, setSearchName, setCurrentPage } from './../../redux/mainPage-reducer';
 import useFetch from './../customHooks/useFetch';
 import { useEffect } from 'react';
 
-const MainPageContainer = ({searchName, ...props}) => {
+const MainPageContainer = ({searchName, currentPage, ...props}) => {
 
     let { data, error, loading, fetchNow } = useFetch(`https://api.github.com/search/repositories?q=stars:%3E3000&sort=stars&per_page=${props.pageSize}&page=1`);
 
@@ -14,9 +14,9 @@ const MainPageContainer = ({searchName, ...props}) => {
 
     useEffect(() => {
         if (searchName) {
-            fetchNow(`https://api.github.com/search/repositories?q=${searchName}+in:name&sort=stars&per_page=${props.pageSize}&page=1`);
+            fetchNow(`https://api.github.com/search/repositories?q=${searchName}+in:name&sort=stars&per_page=${props.pageSize}&page=${currentPage}`);
         }
-    }, [searchName])
+    }, [searchName, currentPage])
 
     if (loading) return <div>Loading...</div>;
     if (error) console.log(error);
@@ -26,7 +26,8 @@ const MainPageContainer = ({searchName, ...props}) => {
             setSearchName={props.setSearchName}
             pageSize={props.pageSize}
             totalCount={props.totalCount}
-            currentPage={props.currentPage} />
+            currentPage={currentPage} 
+            setCurrentPage={props.setCurrentPage} />
     )
 }
 
@@ -40,4 +41,4 @@ const mapStateToProps = (state) => {
     }
 };
 
-export default connect(mapStateToProps, { setRepositories, setSearchName })(MainPageContainer);
+export default connect(mapStateToProps, { setRepositories, setSearchName, setCurrentPage })(MainPageContainer);
