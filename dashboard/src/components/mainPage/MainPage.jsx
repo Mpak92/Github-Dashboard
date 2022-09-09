@@ -1,19 +1,11 @@
 import styles from './MainPage.module.css';
 import { useForm } from "react-hook-form";
-import useFetch from './../customHooks/useFetch';
 
 const MainPage = (props) => {
-
-    const { data, error, loading } = useFetch(`https://api.github.com/search/repositories?q=stars:%3E3000&sort=stars&per_page=${props.pageSize}&page=1`);
-    if (loading) return <div>Loading...</div>;
-    if (error) console.log(error);
-    
-    props.setRepositories(data?.items);
-
     return (
         <div className={styles.container}>
             <div className={styles.titul}>Github Dasgboard</div>
-            <div className={styles.filter}><MainPageForm /></div>
+            <div className={styles.filter}><MainPageForm setSearchName={props.setSearchName} /></div>
             <div className={styles.list}>
                 <table className={styles.table}>
                     <thead>
@@ -43,10 +35,10 @@ const MainPage = (props) => {
     )
 }
 
-const MainPageForm = () => {
+const MainPageForm = (props) => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = data => {
-        console.log(data);
+        props.setSearchName(data.searchByName);
     }
 
     return (

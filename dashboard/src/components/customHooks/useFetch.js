@@ -6,7 +6,7 @@ const useFetch = (url) => {
     const [data, setData] = useState(null);
     const [error, setError] = useState(null);
 
-    useEffect(() => {
+    const fetchNow = (url) => {
         setLoading(true);
         axios
             .get(url)
@@ -19,7 +19,11 @@ const useFetch = (url) => {
             .finally(() => {
                 setLoading(false)
             })
-    }, [url])
+    }
+
+    useEffect(() => {
+        if (url) fetchNow(url)
+    }, [])
 
     return { data, error, loading }
 }
