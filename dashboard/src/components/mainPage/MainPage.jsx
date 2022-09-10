@@ -1,7 +1,8 @@
 import styles from './MainPage.module.css';
 import { useForm } from "react-hook-form";
 import Paginator from '../common/Paginator';
-import { useEffect } from 'react';
+import MainPageTable from './MainPageTable';
+// import { useEffect } from 'react';
 
 const MainPage = (props) => {
     return (
@@ -20,22 +21,15 @@ const MainPage = (props) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {props.repositories.map((rep, index) => {
-                            return <tr key={rep.id}>
-                                <td>{index + 1}</td>
-                                <td>{rep.name}</td>
-                                <td>{rep.stargazers_count}</td>
-                                <td>{rep.pushed_at}</td>
-                                <td>{rep.html_url}</td>
-                            </tr>
-                        })}
+                        <MainPageTable repositories={props.repositories} currentPage={props.currentPage} />
                     </tbody>
                 </table>
             </div>
-            <div className={styles.paginator}><Paginator pageSize={props.pageSize}
-                totalCount={props.totalCount}
-                currentPage={props.currentPage} 
-                setCurrentPage={props.setCurrentPage} />
+            <div>
+                {props.searchName && <Paginator pageSize={props.pageSize}
+                    totalCount={props.totalCount}
+                    currentPage={props.currentPage}
+                    setCurrentPage={props.setCurrentPage} />}
             </div>
         </div>
     )

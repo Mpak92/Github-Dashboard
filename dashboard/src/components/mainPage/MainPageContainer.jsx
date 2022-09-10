@@ -27,7 +27,8 @@ const MainPageContainer = ({searchName, currentPage, ...props}) => {
             pageSize={props.pageSize}
             totalCount={props.totalCount}
             currentPage={currentPage} 
-            setCurrentPage={props.setCurrentPage} />
+            setCurrentPage={props.setCurrentPage} 
+            searchName={searchName} />
     )
 }
 

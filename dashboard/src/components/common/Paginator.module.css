@@ -11,4 +11,9 @@
 .activePage {
     font-size: 28px;
     font-weight: bold;
+    cursor: pointer;
+}
+
+.notActive {
+    cursor: pointer;
 }

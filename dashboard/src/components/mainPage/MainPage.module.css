@@ -56,7 +56,3 @@
 .table tbody tr td:last-child {
 	border-radius: 0 8px 8px 0;
 }
-
-.paginator {
-    font-size: 20px;
-}
