@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import MainPage from './MainPage';
-import { setRepositories, setSearchName, setCurrentPage } from './../../redux/mainPage-reducer';
-import useFetch from './../customHooks/useFetch';
+import { setRepositories, setSearchName, setCurrentPage } from '../../redux/mainPage-reducer';
+import useFetch from '../customHooks/useFetch';
 import { useEffect } from 'react';
 
 const MainPageContainer = ({searchName, currentPage, ...props}) => {

@@ -1,0 +1,48 @@
+.container {
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    margin-top: 50px;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+.hat {
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    justify-items: center;
+    align-items: center;
+}
+
+.name {
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.stars {
+    font-size: 20px;
+}
+
+.data {
+    font-size: 20px;
+}
+
+.profile {
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.photo img {
+    height: 150px;
+    width: 150px;
+}
+
+.lists {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.description {
+    grid-column: 2 / 3;
+    grid-row: 1 / 3;
+}
