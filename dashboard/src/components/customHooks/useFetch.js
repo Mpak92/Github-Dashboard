@@ -23,7 +23,7 @@ const useFetch = (url) => {
 
     useEffect(() => {
         if (url) fetchNow(url)
-    }, [])
+    }, [url])
 
     return { data, error, loading, fetchNow }
 }

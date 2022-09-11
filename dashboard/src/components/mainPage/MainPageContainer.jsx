@@ -1,8 +1,9 @@
 import { connect } from 'react-redux';
 import MainPage from './MainPage';
-import { setRepositories, setSearchName, setCurrentPage } from './../../redux/mainPage-reducer';
-import useFetch from './../customHooks/useFetch';
+import { setRepositories, setSearchName, setCurrentPage } from '../../redux/mainPage-reducer';
+import useFetch from '../customHooks/useFetch';
 import { useEffect } from 'react';
+import { setRepositoryUrl } from './../../redux/repositoryCard-reducer';
 
 const MainPageContainer = ({searchName, currentPage, ...props}) => {
 
@@ -28,7 +29,8 @@ const MainPageContainer = ({searchName, currentPage, ...props}) => {
             totalCount={props.totalCount}
             currentPage={currentPage} 
             setCurrentPage={props.setCurrentPage} 
-            searchName={searchName} />
+            searchName={searchName}
+            setRepositoryUrl={props.setRepositoryUrl} />
     )
 }
 
@@ -42,4 +44,4 @@ const mapStateToProps = (state) => {
     }
 };
 
-export default connect(mapStateToProps, { setRepositories, setSearchName, setCurrentPage })(MainPageContainer);
+export default connect(mapStateToProps, { setRepositories, setSearchName, setCurrentPage, setRepositoryUrl })(MainPageContainer);

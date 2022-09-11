@@ -21,7 +21,9 @@ const MainPage = (props) => {
                         </tr>
                     </thead>
                     <tbody>
-                        <MainPageTable repositories={props.repositories} currentPage={props.currentPage} />
+                        <MainPageTable repositories={props.repositories}
+                            currentPage={props.currentPage}
+                            setRepositoryUrl={props.setRepositoryUrl} />
                     </tbody>
                 </table>
             </div>

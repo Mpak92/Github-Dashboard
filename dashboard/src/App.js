@@ -1,10 +1,12 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import MainPageContainer from './components/mainPage/MainPageContainer';
+import MainPageContainer from './components/MainPage/MainPageContainer';
+import RepositoryCardContainer from './components/RepositoryCard/RepositoryCardContainer';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path='/:repName' element={<RepositoryCardContainer />} />
         <Route path='/' element={<MainPageContainer />} />
       </Routes>
     </BrowserRouter>
