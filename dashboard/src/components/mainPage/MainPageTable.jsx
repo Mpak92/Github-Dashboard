@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 
+import { Link } from 'react-router-dom';
+
 const MainPageTable = (props) => {
     return (<>
         {props.repositories.map((rep, index) => {
