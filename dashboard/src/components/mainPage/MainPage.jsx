@@ -2,7 +2,6 @@ import styles from './MainPage.module.css';
 import { useForm } from "react-hook-form";
 import Paginator from '../common/Paginator';
 import MainPageTable from './MainPageTable';
-// import { useEffect } from 'react';
 
 const MainPage = (props) => {
     return (
@@ -42,13 +41,6 @@ const MainPageForm = (props) => {
     const onSubmit = data => {
         props.setSearchName(data.searchByName);
     }
-
-    // useEffect(() => {
-    //     const subscription = watch((data) => {
-    //         props.setSearchName(data);
-    //     })
-    //     return () => subscription.unsubscribe();
-    // }, [watch]);
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>

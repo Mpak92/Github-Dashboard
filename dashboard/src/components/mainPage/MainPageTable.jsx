@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
-
-import { Link } from 'react-router-dom';
+import getDate from '../common/getDate';
 
 const MainPageTable = (props) => {
     return (<>
@@ -9,7 +8,7 @@ const MainPageTable = (props) => {
                 <td>{index + 1 + ((props.currentPage - 1) * 10)}</td>
                 <td><Link onClick={() => props.setRepositoryUrl(rep.url)} to={`${rep.name}`}>{rep.name}</Link></td>
                 <td>{rep.stargazers_count}</td>
-                <td>{rep.pushed_at}</td>
+                <td>{getDate(rep.pushed_at)}</td>
                 <td>{rep.html_url}</td>
             </tr>
         })}
