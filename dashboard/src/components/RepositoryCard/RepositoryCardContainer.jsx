@@ -4,6 +4,7 @@ import { setRepositoryCard, setListOfLanguages, setContributors } from './../../
 import { useEffect } from "react";
 import useFetch from "../customHooks/useFetch";
 import { useParams } from "react-router-dom";
+import Preloader from "../common/Preloader";
 
 const RepositoryCardContainer = (props) => {
     const params = useParams();
@@ -24,7 +25,7 @@ const RepositoryCardContainer = (props) => {
         if (contrib) props.setContributors(contrib);
     }, [contrib])
 
-    if (loading) return <div>Loading...</div>;
+    if (loading) return <Preloader />;
     if (error) console.log(error);
 
     return (

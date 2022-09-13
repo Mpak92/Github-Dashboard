@@ -1,6 +1,6 @@
-import style from './RepositoryCard.module.css'
-import photo from './../../assets/images/PhotoPlaceholder.jpg'
-import getDate from '../common/getDate'
+import style from './RepositoryCard.module.css';
+import photo from './../../assets/images/PhotoPlaceholder.jpg';
+import getDate from '../common/getDate';
 
 const RepositoryCard = ({ repositoryCard, ...props }) => {
     return (
