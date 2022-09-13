@@ -6,7 +6,7 @@ import MainPageTable from './MainPageTable';
 const MainPage = (props) => {
     return (
         <div className={styles.container}>
-            <div className={styles.titul}>Github Dasgboard</div>
+            <div className={styles.titul}>Github Dashboard</div>
             <div className={styles.filter}><MainPageForm setSearchName={props.setSearchName} /></div>
             <div className={styles.list}>
                 <table className={styles.table}>

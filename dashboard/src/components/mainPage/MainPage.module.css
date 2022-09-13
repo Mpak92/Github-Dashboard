@@ -22,9 +22,24 @@
 }
 
 .table {
-	width: 100%;
+	table-layout: fixed;
 	border: none;
 	margin-bottom: 20px;
+}
+thead th:nth-child(1) {
+	width: auto;
+}
+thead th:nth-child(2) {
+	width: 400px;
+}
+thead th:nth-child(3) {
+	width: 160px;
+}
+thead th:nth-child(4) {
+	width: 180px;
+}
+thead th:nth-child(5) {
+	width: auto;
 }
 .table thead th {
 	font-weight: bold;
@@ -41,7 +56,6 @@
 	border-radius: 0 8px 8px 0;
 }
 .table tbody td {
-	text-align: left;
 	border: none;
 	padding: 10px 15px;
 	font-size: 14px;
@@ -55,4 +69,29 @@
 }
 .table tbody tr td:last-child {
 	border-radius: 0 8px 8px 0;
+}
+
+.star {
+	text-align: center;
+}
+
+.date {
+	text-align: center;
+}
+
+.link {
+	text-decoration: none;
+}
+
+.link:link {
+	color: black;
+}
+
+.link:visited {
+	color: black;
+}
+
+.link:hover {
+	color: black;
+	font-weight: bold;
 }

@@ -3,9 +3,12 @@ import RepositoryCard from "./RepositoryCard";
 import { setRepositoryCard, setListOfLanguages, setContributors } from './../../redux/repositoryCard-reducer';
 import { useEffect } from "react";
 import useFetch from "../customHooks/useFetch";
+import { useParams } from "react-router-dom";
 
 const RepositoryCardContainer = (props) => {
-    let { data, error, loading } = useFetch(props.repositoryUrl);
+    const params = useParams();
+
+    let { data, error, loading } = useFetch(`https://api.github.com/repos/${params.repOwner}/${params.repName}`);
     let { data: lang } = useFetch(data?.languages_url);
     let { data: contrib } = useFetch(data?.contributors_url);
 

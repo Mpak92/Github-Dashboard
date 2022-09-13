@@ -6,7 +6,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/:repName' element={<RepositoryCardContainer />} />
+        <Route path='/:repOwner/:repName' element={<RepositoryCardContainer />} />
         <Route path='/' element={<MainPageContainer />} />
       </Routes>
     </BrowserRouter>
