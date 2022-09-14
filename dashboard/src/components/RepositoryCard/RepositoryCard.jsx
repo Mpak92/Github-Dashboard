@@ -1,6 +1,6 @@
 import style from './RepositoryCard.module.css';
 import photo from './../../assets/images/PhotoPlaceholder.jpg';
-import getDate from '../common/getDate';
+import moment from 'moment';
 
 const RepositoryCard = ({ repositoryCard, ...props }) => {
     return (
@@ -8,7 +8,7 @@ const RepositoryCard = ({ repositoryCard, ...props }) => {
             <div className={style.hat}>
                 <div className={style.name}>{repositoryCard.name}</div>
                 <div className={style.stars}>Количество звезд на github: {repositoryCard.stargazers_count}</div>
-                <div className={style.data}>Дата последнего коммита: {getDate(repositoryCard.pushed_at)}</div>
+                <div className={style.data}>Дата последнего коммита: {moment(repositoryCard.pushed_at).format('DD.MM.YYYY HH:mm')}</div>
             </div>
             <div className={style.profile}>
                 <div className={style.owner}>

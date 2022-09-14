@@ -4,6 +4,7 @@ import { setRepositories, setSearchName, setCurrentPage } from '../../redux/main
 import useFetch from '../customHooks/useFetch';
 import { useEffect } from 'react';
 import { setRepositoryUrl } from './../../redux/repositoryCard-reducer';
+import Preloader from '../common/Preloader';
 
 const MainPageContainer = ({searchName, currentPage, ...props}) => {
 
@@ -19,7 +20,7 @@ const MainPageContainer = ({searchName, currentPage, ...props}) => {
         }
     }, [searchName, currentPage])
 
-    if (loading) return <div>Loading...</div>;
+    if (loading) return <Preloader />;
     if (error) console.log(error);
 
     return (
