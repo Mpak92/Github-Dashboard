@@ -1,10 +1,8 @@
-const SET_REPOSITORY_URL = 'SET_REPOSITORY_URL';
 const SET_REPOSITORY_CARD = 'SET_REPOSITORY_CARD';
 const SET_LIST_OF_LANGUAGES = 'SET_LIST_OF_LANGUAGES';
 const SET_CONTRIBUTORS = 'SET_CONTRIBUTORS';
 
 const initialState = {
-    repositoryUrl: '',
     repositoryCard: {},
     listOfLanguages: {},
     contributors: []
@@ -12,12 +10,6 @@ const initialState = {
 
 const repositoryCardReducer = (state = initialState, action) => {
     switch (action.type) {
-        case SET_REPOSITORY_URL:
-            return {
-                ...state,
-                repositoryUrl: action.url
-            };
-
         case SET_REPOSITORY_CARD:
             return {
                 ...state,
@@ -41,9 +33,6 @@ const repositoryCardReducer = (state = initialState, action) => {
     }
 }
 
-export const setRepositoryUrl = (url) => {
-    return { type: SET_REPOSITORY_URL, url };
-};
 export const setRepositoryCard = (card) => {
     return { type: SET_REPOSITORY_CARD, card };
 };
