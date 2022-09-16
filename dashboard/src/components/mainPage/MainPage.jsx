@@ -1,13 +1,55 @@
 import styles from './MainPage.module.css';
-import { useForm } from "react-hook-form";
 import Paginator from '../common/Paginator';
 import MainPageTable from './MainPageTable';
+import MainPageForm from './MainPageForm';
+import { useDispatch, useSelector } from 'react-redux';
+import { setRepositories, setSearchName, setCurrentPage } from '../../redux/mainPage-reducer';
+import useFetch from '../customHooks/useFetch';
+import { useEffect } from 'react';
+import Preloader from '../common/Preloader';
 
-const MainPage = (props) => {
+const MainPage = () => {
+    const repositories = useSelector(state => state.main.repositories);
+    const pageSize = useSelector(state => state.main.pageSize);
+    const currentPage = useSelector(state => state.main.currentPage);
+    const totalCount = useSelector(state => state.main.totalCount);
+    const searchName = useSelector(state => state.main.searchName);
+
+    const dispatch = useDispatch();
+
+    const getSearchName = (name) => {
+        dispatch(setSearchName(name));
+    }
+
+    const getCurrentPage = (pageNumber) => {
+        dispatch(setCurrentPage(pageNumber));
+    }
+
+    let { data, error, loading, fetchNow } = useFetch(`https://api.github.com/search/repositories?q=stars:%3E3000&sort=stars&per_page=${pageSize}&page=1`);
+
+    useEffect(() => {
+        if (data) dispatch(setRepositories(data.items, data.total_count));
+    }, [data])
+
+    useEffect(() => {
+        if (searchName) {
+            fetchNow(`https://api.github.com/search/repositories?q=${searchName}+in:name&sort=stars&per_page=${pageSize}&page=${currentPage}`);
+        }
+    }, [searchName, currentPage])
+
+    // useEffect(() => {
+    //     if (searchName === '') {
+    //         fetchNow(`https://api.github.com/search/repositories?q=stars:%3E3000&sort=stars&per_page=${pageSize}&page=1`);
+    //     }
+    // }, [searchName])
+
+    if (loading) return <Preloader />;
+    if (error) console.log(error);
+
     return (
         <div className={styles.container}>
             <div className={styles.titul}>Github Dashboard</div>
-            <div className={styles.filter}><MainPageForm setSearchName={props.setSearchName} /></div>
+            <div className={styles.filter}><MainPageForm getSearchName={getSearchName} searchName={searchName} /></div>
             <div className={styles.list}>
                 <table className={styles.table}>
                     <thead>
@@ -20,37 +62,18 @@ const MainPage = (props) => {
                         </tr>
                     </thead>
                     <tbody>
-                        <MainPageTable repositories={props.repositories}
-                            currentPage={props.currentPage}
-                            setRepositoryUrl={props.setRepositoryUrl} />
+                        <MainPageTable repositories={repositories}
+                            currentPage={currentPage} />
                     </tbody>
                 </table>
             </div>
             <div>
-                {props.searchName && <Paginator pageSize={props.pageSize}
-                    totalCount={props.totalCount}
-                    currentPage={props.currentPage}
-                    setCurrentPage={props.setCurrentPage} />}
+                {searchName && <Paginator pageSize={pageSize}
+                    totalCount={totalCount}
+                    currentPage={currentPage}
+                    getCurrentPage={getCurrentPage} />}
             </div>
         </div>
-    )
-}
-
-const MainPageForm = (props) => {
-    const { register, watch, handleSubmit, formState: { errors } } = useForm();
-    const onSubmit = data => {
-        props.setSearchName(data.searchByName);
-    }
-
-    return (
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <div>
-                <input {...register('searchByName')}
-                    type="text"
-                    placeholder="Please enter a repository name to start searching by name"
-                    className={styles.search} />
-            </div>
-        </form>
     )
 }
 

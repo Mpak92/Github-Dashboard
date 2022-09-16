@@ -1,13 +1,13 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import MainPageContainer from './components/MainPage/MainPageContainer';
-import RepositoryCardContainer from './components/RepositoryCard/RepositoryCardContainer';
+import RepositoryCard from './components/RepositoryCard/RepositoryCard';
+import MainPage from './components/MainPage/MainPage';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/:repOwner/:repName' element={<RepositoryCardContainer />} />
-        <Route path='/' element={<MainPageContainer />} />
+        <Route path='/:repOwner/:repName' element={<RepositoryCard />} />
+        <Route path='/' element={<MainPage />} />
       </Routes>
     </BrowserRouter>
   );
