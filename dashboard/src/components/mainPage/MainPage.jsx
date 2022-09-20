@@ -5,53 +5,46 @@ import MainPageForm from './MainPageForm';
 import { useDispatch, useSelector } from 'react-redux';
 import { setRepositories, setSearchName, setCurrentPage } from '../../redux/mainPage-reducer';
 import useFetch from '../customHooks/useFetch';
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import Preloader from '../common/Preloader';
 
 const MainPage = () => {
-    const repositories = useSelector(state => state.main.repositories);
-    const pageSize = useSelector(state => state.main.pageSize);
-    const currentPage = useSelector(state => state.main.currentPage);
-    const totalCount = useSelector(state => state.main.totalCount);
-    const searchName = useSelector(state => state.main.searchName);
+    const main = useSelector(state => state.main);
 
     const dispatch = useDispatch();
 
-    const getSearchName = (name) => {
+    const getSearchName = useCallback((name) => {
         dispatch(setSearchName(name));
-    }
+    }, [dispatch])
 
-    const getCurrentPage = (pageNumber) => {
+    const getCurrentPage = useCallback((pageNumber) => {
         dispatch(setCurrentPage(pageNumber));
-    }
+    }, [dispatch])
 
-    let { data, error, loading, fetchNow } = useFetch(`https://api.github.com/search/repositories?q=stars:%3E3000&sort=stars&per_page=${pageSize}&page=1`);
+    let { data, error, loading, fetchNow } = useFetch(main.searchName ? null : `https://api.github.com/search/repositories?q=stars:%3E3000&sort=stars&per_page=${main.pageSize}&page=1`);
 
     useEffect(() => {
         if (data) dispatch(setRepositories(data.items, data.total_count));
     }, [data])
 
     useEffect(() => {
-        if (searchName) {
-            fetchNow(`https://api.github.com/search/repositories?q=${searchName}+in:name&sort=stars&per_page=${pageSize}&page=${currentPage}`);
+        if (!main.searchName) getCurrentPage(1);
+    }, [])
+
+    useEffect(() => {
+        if (main.searchName) {
+            fetchNow(`https://api.github.com/search/repositories?q=${main.searchName}+in:name&sort=stars&per_page=${main.pageSize}&page=${main.currentPage}`);
         }
-    }, [searchName, currentPage])
+    }, [main.searchName, main.currentPage])
 
-    // useEffect(() => {
-    //     if (searchName === '') {
-    //         fetchNow(`https://api.github.com/search/repositories?q=stars:%3E3000&sort=stars&per_page=${pageSize}&page=1`);
-    //     }
-    // }, [searchName])
-
-    if (loading) return <Preloader />;
     if (error) console.log(error);
 
     return (
         <div className={styles.container}>
             <div className={styles.titul}>Github Dashboard</div>
-            <div className={styles.filter}><MainPageForm getSearchName={getSearchName} searchName={searchName} /></div>
+            <div className={styles.filter}><MainPageForm getSearchName={getSearchName} searchName={main.searchName} /></div>
             <div className={styles.list}>
-                <table className={styles.table}>
+                {loading ? <Preloader /> : <table className={styles.table}>
                     <thead>
                         <tr>
                             <th>№</th>
@@ -62,15 +55,15 @@ const MainPage = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        <MainPageTable repositories={repositories}
-                            currentPage={currentPage} />
+                        <MainPageTable repositories={main.repositories}
+                            currentPage={main.currentPage} />
                     </tbody>
-                </table>
+                </table>}
             </div>
             <div>
-                {searchName && <Paginator pageSize={pageSize}
-                    totalCount={totalCount}
-                    currentPage={currentPage}
+                {main.searchName && <Paginator pageSize={main.pageSize}
+                    totalCount={main.totalCount}
+                    currentPage={main.currentPage}
                     getCurrentPage={getCurrentPage} />}
             </div>
         </div>
