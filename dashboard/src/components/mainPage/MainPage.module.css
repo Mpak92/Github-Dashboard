@@ -1,32 +1,32 @@
 .container {
-    display: grid;
-    justify-items: center;
+	display: grid;
+	justify-items: center;
 }
 
 .titul {
-    margin-top: 100px;
-    margin-bottom: 50px;
-    font-size: 40px;
-    font-weight: bold;
+	margin-top: 100px;
+	margin-bottom: 50px;
+	font-size: 40px;
+	font-weight: bold;
 
 }
 
 .search {
-    width: 720px;
-    height: 24px;
+	width: 720px;
+	height: 24px;
 }
 
 .button {
 	width: 100px;
-    height: 29px;
+	height: 29px;
 	margin-left: 5px;
 	border: 1px solid black;
 	border-radius: 5px;
 }
 
 .list {
-    margin-top: 10px;
-    margin-bottom: 10px;
+	margin-top: 10px;
+	margin-bottom: 10px;
 }
 
 .table {
@@ -34,21 +34,27 @@
 	border: none;
 	margin-bottom: 20px;
 }
+
 thead th:nth-child(1) {
 	width: auto;
 }
+
 thead th:nth-child(2) {
 	width: 400px;
 }
+
 thead th:nth-child(3) {
 	width: 160px;
 }
+
 thead th:nth-child(4) {
 	width: 180px;
 }
+
 thead th:nth-child(5) {
 	width: auto;
 }
+
 .table thead th {
 	font-weight: bold;
 	text-align: left;
@@ -57,24 +63,30 @@ thead th:nth-child(5) {
 	background: #d8d8d8;
 	font-size: 14px;
 }
+
 .table thead tr th:first-child {
 	border-radius: 8px 0 0 8px;
 }
+
 .table thead tr th:last-child {
 	border-radius: 0 8px 8px 0;
 }
+
 .table tbody td {
 	border: none;
 	padding: 10px 15px;
 	font-size: 14px;
 	vertical-align: top;
 }
-.table tbody tr:nth-child(even){
+
+.table tbody tr:nth-child(even) {
 	background: #f3f3f3;
 }
+
 .table tbody tr td:first-child {
 	border-radius: 8px 0 0 8px;
 }
+
 .table tbody tr td:last-child {
 	border-radius: 0 8px 8px 0;
 }

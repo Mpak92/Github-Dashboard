@@ -13,6 +13,8 @@ const RepositoryCard = () => {
     const listOfLanguages = useSelector(state => state.repCard.listOfLanguages);
     const contributors = useSelector(state => state.repCard.contributors);
 
+    const slicedContributors = contributors.slice(0, 10);
+
     const dispatch = useDispatch();
 
     const params = useParams();
@@ -66,8 +68,8 @@ const RepositoryCard = () => {
                 </div>
                 <div className={style.contributers}>
                     <div className={style.titul}>10 наиболее активных контрибьютеров:</div>
-                    {contributors.map((item, index) => {
-                        if (index <= 9) return <div key={index}>{item.login}: {item.contributions}</div>
+                    {slicedContributors.map((item, index) => {
+                        return <div key={index}>{item.login}: {item.contributions}</div>
                     })}
                 </div>
             </div>

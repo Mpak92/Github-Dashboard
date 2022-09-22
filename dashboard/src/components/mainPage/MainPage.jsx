@@ -29,7 +29,7 @@ const MainPage = () => {
 
     useEffect(() => {
         if (!main.searchName) getCurrentPage(1);
-    }, [])
+    }, [main.searchName])
 
     useEffect(() => {
         if (main.searchName) {
@@ -42,7 +42,8 @@ const MainPage = () => {
     return (
         <div className={styles.container}>
             <div className={styles.titul}>Github Dashboard</div>
-            <div className={styles.filter}><MainPageForm getSearchName={getSearchName} searchName={main.searchName} /></div>
+            <div className={styles.filter}><MainPageForm getSearchName={getSearchName}
+                searchName={main.searchName} /></div>
             <div className={styles.list}>
                 {loading ? <Preloader /> : <table className={styles.table}>
                     <thead>
